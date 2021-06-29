@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+    org.springframework.boot.autoconfigure: DEBUG
+
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          okta:
+            client-id: 0oa12xmvbyK7bCABh5d7
+            client-secret: _GfIfvgOUsPhn73SRu6eDIX_pkd6Vdyp2yesnOjl
+        provider:
+          okta:
+            authorization-uri: https://dev-98825028.okta.com/oauth2/default/v1/authorize
+            token-uri: https://dev-98825028.okta.com/oauth2/default/v1/token
+            user-info-uri: https://dev-98825028.okta.com/oauth2/default/v1/userinfo
+            jwk-set-uri: https://dev-98825028.okta.com/oauth2/default/v1/keys
+
+#messages:
+#  base-uri: http://localhost:8092/messages

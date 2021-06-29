@@ -5,5 +5,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+//@EnableOAuth2Client
 public class SecurityConfig {
 }
