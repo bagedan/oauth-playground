@@ -17,8 +17,7 @@ public class HomeController {
     private Map<String, LocalDateTime> usersLastAccess = new HashMap<>();
 
     @GetMapping("/")
-    @Secured("ROLE_USER")
-//    @PreAuthorize("#oauth2.hasScope('read')")
+    @Secured("ROLE_ADMIN")
     public String getCurrentUser(@AuthenticationPrincipal OidcUser user, Model model) {
         String email = user.getEmail();
 
