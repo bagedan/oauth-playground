@@ -1,5 +1,6 @@
-package com.example.restservice;
+package com.example.restservice.controllers;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ public class HomeController {
     private Map<String, LocalDateTime> usersLastAccess = new HashMap<>();
 
     @GetMapping("/")
+    @Secured("ROLE_USER")
+//    @PreAuthorize("#oauth2.hasScope('read')")
     public String getCurrentUser(@AuthenticationPrincipal OidcUser user, Model model) {
         String email = user.getEmail();
 

@@ -1,15 +1,13 @@
-package com.example.restservice;
+package com.example.restservice.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringFoxConfig {
     @Bean
     public Docket api() {
