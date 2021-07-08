@@ -16,6 +16,7 @@ import java.util.Set;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+
 //@EnableOAuth2Client
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

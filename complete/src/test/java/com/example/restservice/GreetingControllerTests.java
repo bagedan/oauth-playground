@@ -15,38 +15,59 @@
  */
 package com.example.restservice;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static com.example.restservice.OAuthUtils.getOauthAuthenticationFor;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.Test;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
-
 @SpringBootTest
 @AutoConfigureMockMvc
 public class GreetingControllerTests {
 
-	@Autowired
-	private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-	@Test
-	public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
+    private OAuth2User principal;
 
-		this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.content").value("Hello, World!"));
-	}
+    @BeforeEach
+    public void setUpUser() {
+        principal = OAuthUtils.createOAuth2User(
+                "Bogdan Tkach", "bogdan_tkach@example.com");
+    }
 
-	@Test
-	public void paramGreetingShouldReturnTailoredMessage() throws Exception {
+    @Test
+    public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
 
-		this.mockMvc.perform(get("/greeting").param("name", "Spring Community"))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.content").value("Hello, Spring Community!"));
-	}
+        this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value("Hello, World!"));
+    }
+
+    @Test
+    public void paramGreetingShouldReturnTailoredMessage() throws Exception {
+
+        this.mockMvc.perform(get("/greeting").param("name", "Spring Community"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value("Hello, Spring Community!"));
+    }
+
+    @Test
+    public void shouldUseAttributedFromOkta() throws Exception {
+        this.mockMvc.perform(get("/")
+                .with(authentication(getOauthAuthenticationFor(principal))))
+
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value("Hello, Spring Community!"));
+    }
+
 
 }

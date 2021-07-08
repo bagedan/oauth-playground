@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9090
 
 logging:
   level:
@@ -16,15 +16,19 @@ spring:
     oauth2:
       client:
         registration:
-          okta:
-            client-id: 0oa12xmvbyK7bCABh5d7
+          keyclock:
+            client-id: spring-boot-client
             client-secret: _GfIfvgOUsPhn73SRu6eDIX_pkd6Vdyp2yesnOjl
+            authorization-grant-type: authorization_code
+            client-name: spring-boot-client
+            scope: openid
+            redirectUri: http://localhost:9090/oauth/login/client-app
         provider:
-          okta:
-            authorization-uri: https://dev-98825028.okta.com/oauth2/default/v1/authorize
-            token-uri: https://dev-98825028.okta.com/oauth2/default/v1/token
-            user-info-uri: https://dev-98825028.okta.com/oauth2/default/v1/userinfo
-            jwk-set-uri: https://dev-98825028.okta.com/oauth2/default/v1/keys
+          keyclock:
+            authorization-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/token
+            user-info-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/certs
 
 #messages:
 #  base-uri: http://localhost:8092/messages
