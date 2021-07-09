@@ -4,7 +4,7 @@ server:
 logging:
   level:
     root: INFO
-    org.springframework.web: INFO
+    org.springframework.web: DEBUG
     org.springframework.security: DEBUG
     org.springframework.security.oauth2: DEBUG
     org.springframework.boot.autoconfigure: DEBUG
@@ -22,7 +22,7 @@ spring:
             authorization-grant-type: authorization_code
             client-name: spring-boot-client
             scope: openid
-            redirectUri: http://localhost:9090/oauth/login/client-app
+            redirectUri: http://localhost:9090/login/oauth2/code/keyclock
         provider:
           keyclock:
             authorization-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/auth
