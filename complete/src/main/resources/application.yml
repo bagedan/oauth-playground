@@ -18,7 +18,7 @@ spring:
         registration:
           keyclock:
             client-id: spring-boot-client
-            client-secret: _GfIfvgOUsPhn73SRu6eDIX_pkd6Vdyp2yesnOjl
+            client-secret: d15d9c2e-a68e-4250-80f5-57889f4e08ae
             authorization-grant-type: authorization_code
             client-name: spring-boot-client
             scope: openid
@@ -29,6 +29,7 @@ spring:
             token-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/token
             user-info-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/userinfo
             jwk-set-uri: http://localhost:8080/auth/realms/myrealm/protocol/openid-connect/certs
+            user-name-attribute: user_name
 
 #messages:
 #  base-uri: http://localhost:8092/messages
